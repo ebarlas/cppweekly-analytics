@@ -63,11 +63,11 @@ def partition(items, size):
 
 
 def parse_duration(dur):
-    if m := re.match(r'PT(\d+)M', dur):
+    if m := re.match(r'^PT(\d+)M$', dur):
         return 60 * int(m.group(1))
-    elif m := re.match(r'PT(\d+)S', dur):
+    elif m := re.match(r'^PT(\d+)S$', dur):
         return int(m.group(1))
-    elif m := re.match(r'PT(\d+)M(\d+)S', dur):
+    elif m := re.match(r'^PT(\d+)M(\d+)S$', dur):
         return 60 * int(m.group(1)) + int(m.group(2))
 
 
@@ -96,7 +96,7 @@ def plot_episode_durations(episodes, file_name):
     fig, ax = plt.subplots(figsize=(12, 5))
     ax.plot(x, y, 'bo', x, fn(x), '--k')
     ax.grid(True)
-    ax.set(xlabel="Episode", ylabel="Duration", title="C++ Weekly Episode Duration")
+    ax.set(xlabel="Episode", ylabel="Seconds", title="C++ Weekly Episode Duration")
     plt.savefig(file_name)
 
 
