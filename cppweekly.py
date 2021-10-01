@@ -121,7 +121,6 @@ def load_image_rgbs(urls, threads):
     futures = []
     with ThreadPoolExecutor(max_workers=threads) as exec:
         for url in urls:
-            # futures.append(exec.submit(load_image_rgb, url))
             futures.append(exec.submit(load_image_green, url))
     return [f.result() for f in futures]
 
