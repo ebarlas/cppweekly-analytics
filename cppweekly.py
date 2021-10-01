@@ -93,7 +93,7 @@ def plot_episode_durations(episodes, file_name):
     y = [parse_duration(e[1]['contentDetails']['duration']) for e in episodes]
     print_plot(x, y)
     fn = linear_regression(x, y)
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(9, 6))
     ax.plot(x, y, 'bo', x, fn(x), '--k')
     ax.grid(True)
     ax.set(xlabel="Episode", ylabel="Seconds", title="C++ Weekly Episode Duration")
@@ -135,7 +135,7 @@ def plot_episode_green_channels(episodes, rgbs, file_name):
     y = [rgb for rgb in rgbs]
     print_plot(x, y)
     fn = linear_regression(x, y)
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(9, 6))
     ax.plot(x, y, 'bo', x, fn(x), '--k')
     ax.grid(True)
     ax.set(xlabel="Episode", ylabel="Green Channel", title="C++ Weekly Thumbnail Green Color Channel")
