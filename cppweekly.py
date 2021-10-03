@@ -102,13 +102,11 @@ def plot_episode_durations(episodes, file_name):
 
 def average_green(im):
     sum = 0
-    cnt = 0
     rgb = im.convert('RGB')
-    for x in range(im.width):
-        for y in range(im.height):
-            sum += rgb.getpixel((x, y))[1]
-            cnt += 1
-    return sum / cnt
+    coords = [(x, y) for x in range(im.width) for y in range(im.height)]
+    for x, y in coords:
+        sum += rgb.getpixel((x, y))[1]
+    return sum / len(coords)
 
 
 def load_image_green(url):
@@ -117,7 +115,7 @@ def load_image_green(url):
         return average_green(im)
 
 
-def load_image_rgbs(urls, threads):
+def load_image_greens(urls, threads):
     futures = []
     with ThreadPoolExecutor(max_workers=threads) as exec:
         for url in urls:
@@ -164,7 +162,7 @@ def main():
 
     # download episode thumbnails and sample rgb at pixel (0, height/5)
     urls = [e[1]['snippet']['thumbnails']['default']['url'] for e in episodes]
-    rgbs = load_image_rgbs(urls, 10)
+    rgbs = load_image_greens(urls, 10)
 
     # plots
     plot_episode_durations(episodes, 'cw_durations.png')
