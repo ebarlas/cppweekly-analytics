@@ -101,12 +101,9 @@ def plot_episode_durations(episodes, file_name):
 
 
 def average_green(im):
-    sum = 0
     rgb = im.convert('RGB')
-    coords = [(x, y) for x in range(im.width) for y in range(im.height)]
-    for x, y in coords:
-        sum += rgb.getpixel((x, y))[1]
-    return sum / len(coords)
+    greens = [rgb.getpixel((x, y))[1] for x in range(im.width) for y in range(im.height)]
+    return sum(greens) / len(greens)
 
 
 def load_image_green(url):
